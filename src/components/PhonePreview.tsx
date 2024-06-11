@@ -61,7 +61,7 @@ export default function PhonePreview({croppedImageUrl , color}: {
 
         <div className="relative h-full w-full z-40">
 
-            <img src="/clearPhone.png" alt="phone" className="pointer-events-none h-full w-full antialiased rounded-md" />
+            <img src="/clearphone.png" alt="phone" className="pointer-events-none h-full w-full antialiased rounded-md" />
             
         </div>
     </AspectRatio>
