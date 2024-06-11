@@ -8,7 +8,7 @@ export default function OrderReceipt({shippingAddress, orderId, orderDate}: {
 }) {
 
 
-  const baseUrl = process.env.NODE_ENV === "development" ? "http://localhost:300" : "https://phonecasecobra.vercel.app"
+  const baseUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://phonecasecobra.vercel.app"
 
   return (
     <Html>

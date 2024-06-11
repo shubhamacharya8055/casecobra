@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
                     from: "CaseCobra <thingsexplore677@gmail.com>" , 
                     to: [event.data.object.customer_details.email] , 
                     subject: "Thanks for your order!" , 
-                    react: OrderReceipt({orderId: orderId , orderDate: updatedOrder.createdAt.toLocaleDateString() ,
+                    react: OrderReceipt({ orderId , orderDate: updatedOrder.createdAt.toLocaleDateString() ,
                         // @ts-ignore
                         shippingAddress: {
                         name: session.customer_details!.name! ,
