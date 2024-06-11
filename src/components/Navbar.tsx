@@ -8,6 +8,8 @@ export default  async function Navbar() {
 
     const {getUser} = getKindeServerSession()
     const user = await getUser();
+
+
     const isAdmin = user?.email === process.env.ADMIN_EMAIL
 
   return (
@@ -36,7 +38,7 @@ export default  async function Navbar() {
                         })}
                         >Sign out</Link>
 
-                       { isAdmin ?  <Link href="/api/auth/logout"
+                       { isAdmin ?  <Link href="/dashboard"
                         className={buttonVariants({
                             size: "sm",
                             variant: "ghost"

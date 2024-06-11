@@ -75,7 +75,7 @@ export async function crateCheckoutSession({configId}: {configId: string}) {
     const stripeSession = await stripe.checkout.sessions.create({
         success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/thank-you?orderId=${order.id}`,
         cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/configure/preview?id=${config.id}`,
-        payment_method_types: ["card"  , "amazon_pay", "mobilepay"],
+        payment_method_types: ["card"  , "amazon_pay"],
         mode: "payment" , 
         shipping_address_collection: {
             allowed_countries: ["DE" , "US", "IN"]

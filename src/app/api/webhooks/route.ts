@@ -3,6 +3,11 @@ import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import {Resend} from "resend"
+import OrderReceipt from "@/components/emails/OrderReceipt";
+
+
+const resend = new Resend(process.env.RESEND_KEY)
 
 export async function POST(req: NextRequest) {
 
@@ -36,7 +41,7 @@ export async function POST(req: NextRequest) {
                 const billingAddress = session.customer_details!.address
                 const shippingAddress = session.shipping_details!.address
 
-                await db.order.update({
+              const updatedOrder =  await db.order.update({
                     where: {
                         id: orderId , 
                         userId: userId
@@ -67,6 +72,22 @@ export async function POST(req: NextRequest) {
                         }
                     }
 
+                })
+
+                await resend.emails.send({
+                    from: "CaseCobra <thingsexplore677@gmail.com>" , 
+                    to: [event.data.object.customer_details.email] , 
+                    subject: "Thanks for your order!" , 
+                    react: OrderReceipt({orderId: orderId , orderDate: updatedOrder.createdAt.toLocaleDateString() ,
+                        // @ts-ignore
+                        shippingAddress: {
+                        name: session.customer_details!.name! ,
+                        city : shippingAddress!.city! , 
+                        country: shippingAddress!.country! ,
+                        postalCode: shippingAddress!.postal_code! , 
+                        street: shippingAddress!.line1! , 
+                        state: shippingAddress!.state, 
+                    }})
                 })
             }
 

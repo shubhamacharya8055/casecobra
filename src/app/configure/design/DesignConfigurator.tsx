@@ -404,6 +404,8 @@ export default function DesignConfigurator({configId , imageUrl , imageDimension
 
                                 <Button size={"sm"} className="w-full"
                                 disabled = {isPending}
+                                isLoading = {isPending}
+                                loadingText="Saving"
                                 onClick={() => saveConfigFn({
                                     configId , 
                                     color: options.color.value , 
